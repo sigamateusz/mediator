@@ -1,13 +1,34 @@
 package com.mediator.pattern;
 
-public class Mediator {
+class Mediator {
+    private Fan fan;
+    private PowerSupplier powerSupplier;
 
-    public void press() {
+    void setFan(Fan fan) {
+        this.fan = fan;
     }
 
-    public void start() {
+    void setPowerSupplier(PowerSupplier powerSupplier) {
+        this.powerSupplier = powerSupplier;
     }
 
-    public void stop() {
+    void press() {
+        if (powerSupplier.isTurnedOn()) {
+            fan.turnOff();
+        } else {
+            fan.turnOn();
+        }
+    }
+
+    void start() {
+        powerSupplier.turnOn();
+    }
+
+    void stop() {
+        powerSupplier.turnOff();
+    }
+
+    boolean isFanOn() {
+        return powerSupplier.isTurnedOn();
     }
 }
